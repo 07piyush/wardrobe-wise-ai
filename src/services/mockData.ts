@@ -80,7 +80,7 @@ export const mockClothingItems: ClothingItem[] = [
     color: "black",
     material: "polyester blend",
     formality: "formal",
-    season: ["all"],
+    season: ["spring", "summer", "fall", "winter"],
     occasions: ["formal", "dinner", "party"],
     imageUrl: "https://images.unsplash.com/photo-1551803091-e20673f15770?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
     tags: ["elegant", "classic", "essential"],
@@ -93,7 +93,7 @@ export const mockClothingItems: ClothingItem[] = [
     color: "white",
     material: "cotton",
     formality: "smart casual",
-    season: ["all"],
+    season: ["spring", "summer", "fall", "winter"],
     occasions: ["work", "formal", "meeting"],
     imageUrl: "https://images.unsplash.com/photo-1563630423918-b58f07336ac9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
     tags: ["classic", "versatile", "professional"],
@@ -106,7 +106,7 @@ export const mockClothingItems: ClothingItem[] = [
     color: "blue",
     material: "denim",
     formality: "casual",
-    season: ["all"],
+    season: ["spring", "summer", "fall", "winter"],
     occasions: ["casual", "weekend", "everyday"],
     imageUrl: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
     tags: ["everyday", "versatile", "comfortable"],
@@ -175,9 +175,9 @@ export const mockOutfits: Outfit[] = [
       mockClothingItems[4] // Black Dress
     ],
     occasion: "formal dinner",
-    season: ["all"],
+    season: ["spring", "summer", "fall", "winter"],
     formality: "formal",
-    weather: ["any"],
+    weather: ["sunny", "partly cloudy", "cloudy"],
     rating: 5
   }
 ];
