@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom colors for the wardrobe app
+				"terracotta": "#E07A5F",
+				"cream": "#F2F1E8",
+				"charcoal": "#3D405B",
+				"sage": "#81B29A",
+				"soft-yellow": "#F2CC8F",
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +91,41 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'slide-in': {
+					'0%': { transform: 'translateX(100%)' },
+					'100%': { transform: 'translateX(0)' }
+				},
+				'slide-out': {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(100%)' }
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
+				'fade-out': {
+					'0%': { opacity: '1' },
+					'100%': { opacity: '0' }
+				},
+				'swipe-right': {
+					'0%': { transform: 'translateX(0) rotate(0)', opacity: '1' },
+					'100%': { transform: 'translateX(200px) rotate(20deg)', opacity: '0' }
+				},
+				'swipe-left': {
+					'0%': { transform: 'translateX(0) rotate(0)', opacity: '1' },
+					'100%': { transform: 'translateX(-200px) rotate(-20deg)', opacity: '0' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'slide-in': 'slide-in 0.2s ease-out',
+				'slide-out': 'slide-out 0.2s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out',
+				'fade-out': 'fade-out 0.3s ease-out',
+				'swipe-right': 'swipe-right 0.5s ease-out forwards',
+				'swipe-left': 'swipe-left 0.5s ease-out forwards'
 			}
 		}
 	},
