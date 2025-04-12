@@ -31,7 +31,7 @@ const Wardrobe = () => {
   
   return (
     <AppLayout>
-      <div className="max-w-md mx-auto px-4 py-6">
+      <div className="max-w-md mx-auto px-4 py-6 pb-20">
         <header className="mb-6">
           <h1 className="text-2xl font-bold text-charcoal">My Wardrobe</h1>
           
@@ -48,62 +48,88 @@ const Wardrobe = () => {
         </header>
         
         <Tabs defaultValue="all" className="w-full">
-          <TabsList className="w-full mb-4 grid grid-cols-6">
-            <TabsTrigger value="all">All</TabsTrigger>
-            <TabsTrigger value="tops">Tops</TabsTrigger>
-            <TabsTrigger value="bottoms">Bottoms</TabsTrigger>
-            <TabsTrigger value="dresses">Dresses</TabsTrigger>
-            <TabsTrigger value="outerwear">Outer</TabsTrigger>
-            <TabsTrigger value="footwear">Shoes</TabsTrigger>
+          <TabsList className="w-full mb-4 grid grid-cols-6 bg-background/80 backdrop-blur-sm">
+            <TabsTrigger value="all" className="text-xs sm:text-sm">All</TabsTrigger>
+            <TabsTrigger value="tops" className="text-xs sm:text-sm">Tops</TabsTrigger>
+            <TabsTrigger value="bottoms" className="text-xs sm:text-sm">Bottoms</TabsTrigger>
+            <TabsTrigger value="dresses" className="text-xs sm:text-sm">Dresses</TabsTrigger>
+            <TabsTrigger value="outerwear" className="text-xs sm:text-sm">Outer</TabsTrigger>
+            <TabsTrigger value="footwear" className="text-xs sm:text-sm">Shoes</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="all">
-            <div className="grid grid-cols-2 gap-4">
-              {filteredItems.map(item => (
-                <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="tops">
-            <div className="grid grid-cols-2 gap-4">
-              {tops.map(item => (
-                <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="bottoms">
-            <div className="grid grid-cols-2 gap-4">
-              {bottoms.map(item => (
-                <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="dresses">
-            <div className="grid grid-cols-2 gap-4">
-              {dresses.map(item => (
-                <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="outerwear">
-            <div className="grid grid-cols-2 gap-4">
-              {outerwear.map(item => (
-                <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="footwear">
-            <div className="grid grid-cols-2 gap-4">
-              {footwear.map(item => (
-                <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-              ))}
-            </div>
-          </TabsContent>
+          <div className="min-h-[300px]">
+            <TabsContent value="all" className="mt-0">
+              <div className="grid grid-cols-2 gap-4">
+                {filteredItems.length > 0 ? (
+                  filteredItems.map(item => (
+                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
+                  ))
+                ) : (
+                  <p className="col-span-2 text-center py-8 text-gray-500">No items found</p>
+                )}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="tops" className="mt-0">
+              <div className="grid grid-cols-2 gap-4">
+                {tops.length > 0 ? (
+                  tops.map(item => (
+                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
+                  ))
+                ) : (
+                  <p className="col-span-2 text-center py-8 text-gray-500">No tops found</p>
+                )}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="bottoms" className="mt-0">
+              <div className="grid grid-cols-2 gap-4">
+                {bottoms.length > 0 ? (
+                  bottoms.map(item => (
+                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
+                  ))
+                ) : (
+                  <p className="col-span-2 text-center py-8 text-gray-500">No bottoms found</p>
+                )}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="dresses" className="mt-0">
+              <div className="grid grid-cols-2 gap-4">
+                {dresses.length > 0 ? (
+                  dresses.map(item => (
+                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
+                  ))
+                ) : (
+                  <p className="col-span-2 text-center py-8 text-gray-500">No dresses found</p>
+                )}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="outerwear" className="mt-0">
+              <div className="grid grid-cols-2 gap-4">
+                {outerwear.length > 0 ? (
+                  outerwear.map(item => (
+                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
+                  ))
+                ) : (
+                  <p className="col-span-2 text-center py-8 text-gray-500">No outerwear found</p>
+                )}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="footwear" className="mt-0">
+              <div className="grid grid-cols-2 gap-4">
+                {footwear.length > 0 ? (
+                  footwear.map(item => (
+                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
+                  ))
+                ) : (
+                  <p className="col-span-2 text-center py-8 text-gray-500">No footwear found</p>
+                )}
+              </div>
+            </TabsContent>
+          </div>
         </Tabs>
       </div>
     </AppLayout>

@@ -9,13 +9,14 @@ interface FancyPageTransitionProps {
 
 const FancyPageTransition: React.FC<FancyPageTransitionProps> = ({ children, location }) => {
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={location}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.2 }}
+        className="w-full"
       >
         {children}
       </motion.div>
