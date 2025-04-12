@@ -6,6 +6,7 @@ import { recommendationService } from "../services/recommendationService";
 import { ClothingItem as ClothingItemType } from "../models/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { Search } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Wardrobe = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,24 +29,71 @@ const Wardrobe = () => {
     // In the future, this would show a detailed view of the item
     console.log("Item clicked:", item);
   };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.05,
+        duration: 0.3
+      }
+    })
+  };
+  
+  const renderItems = (items: ClothingItemType[]) => {
+    if (items.length === 0) {
+      return (
+        <div className="col-span-2 flex flex-col items-center justify-center py-12 text-gray-500">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <p className="mb-2">No items found</p>
+            <p className="text-xs">Try a different search term or category</p>
+          </motion.div>
+        </div>
+      );
+    }
+    
+    return items.map((item, index) => (
+      <motion.div
+        key={item.id}
+        custom={index}
+        initial="hidden"
+        animate="visible"
+        variants={itemVariants}
+      >
+        <ClothingItem item={item} onClick={handleItemClick} />
+      </motion.div>
+    ));
+  };
   
   return (
     <AppLayout>
       <div className="max-w-md mx-auto px-4 py-6 pb-20">
-        <header className="mb-6">
-          <h1 className="text-2xl font-bold text-charcoal">My Wardrobe</h1>
+        <motion.header 
+          className="mb-6"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <h1 className="text-2xl font-bold text-charcoal dark:text-white">My Wardrobe</h1>
           
           <div className="relative mt-4">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
             <input
               type="text"
               placeholder="Search your wardrobe..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg"
+              className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white/70 dark:bg-charcoal/70 backdrop-blur-sm"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-        </header>
+        </motion.header>
         
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="w-full mb-4 grid grid-cols-6 bg-background/80 backdrop-blur-sm">
@@ -60,73 +108,37 @@ const Wardrobe = () => {
           <div className="min-h-[300px]">
             <TabsContent value="all" className="mt-0">
               <div className="grid grid-cols-2 gap-4">
-                {filteredItems.length > 0 ? (
-                  filteredItems.map(item => (
-                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-                  ))
-                ) : (
-                  <p className="col-span-2 text-center py-8 text-gray-500">No items found</p>
-                )}
+                {renderItems(filteredItems)}
               </div>
             </TabsContent>
             
             <TabsContent value="tops" className="mt-0">
               <div className="grid grid-cols-2 gap-4">
-                {tops.length > 0 ? (
-                  tops.map(item => (
-                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-                  ))
-                ) : (
-                  <p className="col-span-2 text-center py-8 text-gray-500">No tops found</p>
-                )}
+                {renderItems(tops)}
               </div>
             </TabsContent>
             
             <TabsContent value="bottoms" className="mt-0">
               <div className="grid grid-cols-2 gap-4">
-                {bottoms.length > 0 ? (
-                  bottoms.map(item => (
-                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-                  ))
-                ) : (
-                  <p className="col-span-2 text-center py-8 text-gray-500">No bottoms found</p>
-                )}
+                {renderItems(bottoms)}
               </div>
             </TabsContent>
             
             <TabsContent value="dresses" className="mt-0">
               <div className="grid grid-cols-2 gap-4">
-                {dresses.length > 0 ? (
-                  dresses.map(item => (
-                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-                  ))
-                ) : (
-                  <p className="col-span-2 text-center py-8 text-gray-500">No dresses found</p>
-                )}
+                {renderItems(dresses)}
               </div>
             </TabsContent>
             
             <TabsContent value="outerwear" className="mt-0">
               <div className="grid grid-cols-2 gap-4">
-                {outerwear.length > 0 ? (
-                  outerwear.map(item => (
-                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-                  ))
-                ) : (
-                  <p className="col-span-2 text-center py-8 text-gray-500">No outerwear found</p>
-                )}
+                {renderItems(outerwear)}
               </div>
             </TabsContent>
             
             <TabsContent value="footwear" className="mt-0">
               <div className="grid grid-cols-2 gap-4">
-                {footwear.length > 0 ? (
-                  footwear.map(item => (
-                    <ClothingItem key={item.id} item={item} onClick={handleItemClick} />
-                  ))
-                ) : (
-                  <p className="col-span-2 text-center py-8 text-gray-500">No footwear found</p>
-                )}
+                {renderItems(footwear)}
               </div>
             </TabsContent>
           </div>
