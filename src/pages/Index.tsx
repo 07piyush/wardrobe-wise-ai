@@ -1,12 +1,15 @@
 
 import React, { useState, useEffect } from "react";
 import AppLayout from "../components/Layout/AppLayout";
-import OutfitCard from "../components/Outfit/OutfitCard";
+import OutfitCardAnimated from "../components/Outfit/OutfitCardAnimated";
 import WeatherDisplay from "../components/Weather/WeatherDisplay";
 import { recommendationService } from "../services/recommendationService";
 import { Outfit } from "../models/types";
 import { mockUser } from "../services/mockData";
 import { useToast } from "../hooks/use-toast";
+import KineticTypography from "../components/Animation/KineticTypography";
+import ScrollReveal from "../components/Animation/ScrollReveal";
+import { motion } from "framer-motion";
 
 const Index = () => {
   const [outfits, setOutfits] = useState<Outfit[]>([]);
@@ -62,29 +65,49 @@ const Index = () => {
   
   return (
     <AppLayout>
-      <div className="max-w-md mx-auto px-4 py-6">
+      <motion.div 
+        className="max-w-md mx-auto px-4 py-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <header className="mb-6">
-          <h1 className="text-2xl font-bold text-charcoal">Wardrobe Wise</h1>
-          <div className="flex justify-between items-center mt-4">
-            <p className="text-gray-600">Today's suggestions</p>
-            <WeatherDisplay weather={weather} />
-          </div>
+          <motion.div
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, type: "spring" }}
+          >
+            <h1 className="text-2xl font-bold">
+              <KineticTypography text="Wardrobe Wise" className="text-charcoal dark:text-cream" />
+            </h1>
+          </motion.div>
+          
+          <ScrollReveal threshold={0.1} delay={0.3}>
+            <div className="flex justify-between items-center mt-4">
+              <p className="text-gray-600 dark:text-gray-300">Today's suggestions</p>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <WeatherDisplay weather={weather} />
+              </motion.div>
+            </div>
+          </ScrollReveal>
         </header>
         
-        <div className="relative mt-4">
-          {currentOutfit ? (
-            <OutfitCard 
-              outfit={currentOutfit}
-              onSwipeLeft={handleSwipeLeft}
-              onSwipeRight={handleSwipeRight}
-            />
-          ) : (
-            <div className="text-center py-20 bg-white rounded-lg shadow">
-              <p>No outfit recommendations available.</p>
-            </div>
-          )}
-        </div>
-      </div>
+        <ScrollReveal threshold={0.1} delay={0.4}>
+          <div className="relative mt-4">
+            {currentOutfit ? (
+              <OutfitCardAnimated 
+                outfit={currentOutfit}
+                onSwipeLeft={handleSwipeLeft}
+                onSwipeRight={handleSwipeRight}
+              />
+            ) : (
+              <div className="text-center py-20 bg-white dark:bg-charcoal/40 rounded-lg shadow glassmorphism">
+                <p>No outfit recommendations available.</p>
+              </div>
+            )}
+          </div>
+        </ScrollReveal>
+      </motion.div>
     </AppLayout>
   );
 };
