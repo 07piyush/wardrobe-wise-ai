@@ -35,6 +35,36 @@
 
     --radius: 0.75rem;
   }
+
+  .dark {
+    --background: 230 16% 18%;
+    --foreground: 48 18% 95%;
+
+    --card: 230 16% 22%;
+    --card-foreground: 48 18% 95%;
+
+    --popover: 230 16% 22%;
+    --popover-foreground: 48 18% 95%;
+
+    --primary: 14 65% 63%;
+    --primary-foreground: 48 18% 95%;
+
+    --secondary: 157 24% 40%;
+    --secondary-foreground: 48 18% 95%;
+
+    --muted: 230 16% 30%;
+    --muted-foreground: 48 10% 80%;
+
+    --accent: 39 80% 35%;
+    --accent-foreground: 48 18% 95%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 48 18% 95%;
+
+    --border: 230 16% 30%;
+    --input: 230 16% 30%;
+    --ring: 14 65% 50%;
+  }
 }
 
 @layer base {
@@ -43,8 +73,9 @@
   }
 
   body {
-    @apply bg-cream text-charcoal;
+    @apply bg-cream text-charcoal dark:bg-charcoal dark:text-cream;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   html {
